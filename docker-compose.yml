@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: social_services_con
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./print:/app/print
+      - ./UI:/app/UI
+      - ./config.json:/app/config.json
+      - .:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped

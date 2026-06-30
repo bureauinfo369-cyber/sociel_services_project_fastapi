@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموظفون</title>
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="icon" href="/static/assets/img/employee.png" type="image/x-icon">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar " style="margin-bottom: 15px;">
+            <div>
+                <a href="/">الطلبات 📋</a>
+            </div>
+            <div>
+                <a href="/employees-page">الموظفون 👨🏻‍💼</a>
+            </div>
+
+    </nav>
+    <div class="notification" id="notification"></div>
+
+    <div class="fileds">
+    <div class="grid">
+        <!-- NumCompte -->
+        <div>
+            <label for="NumCompte">رقم الحساب</label>
+            <input 
+                type="text" 
+                id="NumCompte" 
+                placeholder="رقم الحساب" 
+            />
+        </div>
+
+        <div>
+            <label for="Nom">الإسم واللقب</label>
+            <input 
+                type="text" 
+                id="Nom" 
+                placeholder="الإسم و اللقب" 
+            />
+        </div>
+
+        <div>
+            <label for="Grade">الرتبة</label>
+            <input 
+                type="text" 
+                id="Grade" 
+                placeholder="الرتبة" 
+            />
+        </div>
+        <div>
+            <label for="Poste">الوظيفة</label>
+            <input 
+                type="text" 
+                id="Poste" 
+                placeholder="الوظيفة" 
+            />
+        </div>
+
+        <div>
+            <label for="residence_admin">الإقامة الإدارية</label>
+            <input 
+                type="text" 
+                id="residence_admin" 
+                placeholder="الإقامة الإدارية" 
+            />
+        </div>
+        <div>
+            <label for="lieu_de_travail">مقر العمل</label>
+            <input 
+                type="text" 
+                id="lieu_de_travail" 
+                placeholder="مقر العمل" 
+            />
+        </div>
+        
+
+    </div>
+<!-- Buttons -->
+    <div class="flex gap-3 flex-wrap mt-4">
+        <button 
+            id="searchBtn" 
+            class="bg-purple-600 active:bg-purple-600 hover:bg-purple-700"
+        >
+            بحث 🔍
+        </button>
+        
+        <button 
+            onclick="clearSearch()"
+            class="bg-white border border-gray-300 hover:bg-gray-100"
+        >
+            تفريغ
+        </button>
+        
+        <button 
+            id="addBtn"
+            class="bg-green-600 active:bg-green-600 hover:bg-green-700"
+        >
+            إضافة موظف ➕
+        </button>
+    </div>
+
+</div>
+
+    
+    <div class="container">
+        <h1>الموظفين المسجلين</h1>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>جاري إنشاء ملف PDF...</p>
+        </div>
+        
+        <table id="demandesTable">
+            <thead>
+                <tr>
+                    <th>الحساب</th>
+                    <th>اسم الموظف</th>
+                    <th>الرتبة</th>
+                    <th>الوظيفة</th>
+                    <th>مقر العمل</th>
+                    <th>الإقامة الإدارية</th>
+                    <th>تعديل</th>
+                    <th>حذف</th>
+                    
+
+
+                </tr>
+            </thead>
+            <tbody id="EmploiyesTableBody">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <nav class="fotter " style="margin-top: 15px;">
+        <div>
+            <p>جميع الحقوق محفوظة لفريق التطوير CHIBM-11</p>
+        </div>
+        <div>
+            <a href=""> contact us </a>
+        </div>
+
+    </nav>
+
+    
+    <script src="/static/assets/controle/controle_employie.js"></script>
+</body>
+
+</html>

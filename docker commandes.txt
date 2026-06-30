@@ -1,0 +1,23 @@
+# Start containers (build if needed)
+docker-compose up -d
+
+# Stop containers (keeps containers)
+docker-compose stop
+
+# Stop and remove containers
+docker-compose down
+
+# View logs
+docker-compose logs -f
+
+# Restart containers
+docker-compose restart
+
+# Rebuild and start
+docker-compose up -d --build
+
+# Check status
+docker-compose ps
+
+# Access container shell
+docker-compose exec app bash

@@ -1,0 +1,6 @@
+{
+"server" : "host.docker.internal",
+"database" : "Ouver_Sociel",
+"username" : "sa",
+"password" : "tamtw11"
+}

@@ -1,0 +1,6 @@
+{
+"server" : "11.11.22.12",
+"database" : "social_db",
+"username" : "username",
+"password" : "password"
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الطلبات</title>
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="icon" href="/static/assets/img/checklist.png" type="image/x-icon">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar " style="margin-bottom: 15px;">
+            <div>
+                <a href="/">الطلبات 📋</a>
+            </div>
+            <div>
+                <a href="/employees-page">الموظفون 👨🏻‍💼</a>
+            </div>
+
+    </nav>
+    <div class="notification" id="notification"></div>
+
+    <div class="fileds">
+    <div class="grid">
+        <!-- search_demande_id -->
+        <div>
+            <label for="search_demande_id">رقم الطلب</label>
+            <input 
+                type="text" 
+                id="search_demande_id" 
+                placeholder="رقم الطلب" 
+            />
+        </div>
+
+        <div>
+            <label for="search_NumCompte">رقم الحساب</label>
+            <input 
+                type="text" 
+                id="search_NumCompte" 
+                placeholder="رقم الحساب" 
+            />
+        </div>
+
+        <!-- search_type_prestation -->
+        <div class="md:col-span-2">
+            <label for="search_type_prestation">نوع الطلب</label>
+            <input 
+                type="text" 
+                id="search_type_prestation" 
+                placeholder="نوع الطلب" 
+                list="list_search_type_prestation" 
+                 style="cursor: pointer;"
+            />
+            <datalist id="list_search_type_prestation">
+                <option value="قرض تقسيط">
+                <option value="قرض مالي">
+                <option value="ختان">
+                <option value="زواج">
+                <option value="مرض">
+                <option value="العمرة">
+                <option value="منحة مختلفة">
+            </datalist>
+        </div>
+
+        <!-- search_gestion -->
+        <div>
+            <label for="search_gestion">السنة</label>
+            <input 
+                type="text" 
+                id="search_gestion" 
+                placeholder="السنة" 
+            />
+        </div>
+
+        <!-- search_periode_deduction -->
+        <div>
+            <label for="search_periode_deduction">مدة التسديد</label>
+            <input 
+                type="text" 
+                id="search_periode_deduction" 
+                placeholder="المدة" 
+            />
+        </div>
+
+        <!-- search_Montante -->
+        <div>
+            <label for="search_montante">المبلغ</label>
+            <input 
+                type="text" 
+                id="search_montante" 
+                placeholder="0.00" 
+            />
+        </div>
+
+        <!-- search_statut -->
+        <div class="md:col-span-2">
+            <label for="search_statut">حالة الطلب</label>
+            <input 
+                type="text" 
+                id="search_statut" 
+                placeholder="الحالة" 
+                list="list_search_statut" 
+                style="cursor: pointer;"
+            />
+            <datalist id="list_search_statut">
+                
+                <option value="قيد الدراسة">
+                <option value="قيد التسديد">
+                <option value="مرفوض ">
+                <option value="مسدد">
+            </datalist>
+        </div>         
+    </div>
+<!-- Buttons -->
+    <div class="flex gap-3 flex-wrap mt-4">
+        <button 
+            id="searchBtn" 
+            class="bg-purple-600 active:bg-purple-600 hover:bg-purple-700"
+        >
+            بحث 🔍
+        </button>
+        
+        <button 
+            onclick="clearSearch()"
+            class="bg-white border border-gray-300 hover:bg-gray-100"
+        >
+            تفريغ
+        </button>
+        
+        <button 
+            id="addBtn"
+            class="bg-green-600 active:bg-green-600 hover:bg-green-700"
+        >
+            إضافة طلب ➕
+        </button>
+    </div>
+
+</div>
+
+    
+    <div class="container">
+        <h1>الطلبات المسجلة</h1>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>جاري إنشاء ملف PDF...</p>
+        </div>
+        
+        <table id="demandesTable">
+            <thead>
+                <tr>
+                    <th>رقم الطلب</th>
+                    <th>اسم الموظف</th>
+                    <th>الحساب</th>
+                    <th>نوع الطلب</th>
+                    <th>السنة</th>
+                    <th>المدة</th>
+                    <th>البداية</th>
+                    <th>المبلغ</th>
+                    <th>حالة الطلب</th>
+                    <th>حذف</th>
+                    <th>طباعة</th>
+
+
+                </tr>
+            </thead>
+            <tbody id="demandesTableBody">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <footer class="fotter " style="margin-top: 15px;">
+        <div>
+            <p>جميع الحقوق محفوظة لفريق التطوير CHIBM-11</p>
+        </div>
+        <div>
+            <a href=""> contact us </a>
+        </div>
+
+    </footer>
+
+    
+    <script src="/static/assets/controle/controle_demande.js"></script>
+</body>
+</html>

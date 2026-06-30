@@ -1,0 +1,11 @@
+fastapi
+uvicorn==0.38.0
+pydantic
+sqlalchemy
+reportlab
+arabic-reshaper
+python-bidi
+num2words
+pyodbc
+mirror
+PyPDF2
