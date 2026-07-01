@@ -7,6 +7,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm, cm
 from reportlab.pdfgen import canvas
 import arabic_reshaper
+from reportlab.lib.enums import TA_RIGHT
 from bidi.algorithm import get_display
 import io
 import os
@@ -105,18 +106,18 @@ def Demande_de_prêt(file_path, demande_data, emp_data):
         'ArabicHeaderInfo',
         parent=styles['Normal'],  # Changed from Heading1 to Normal
         fontName=font_name,
-        fontSize=16,
+        fontSize=14,
         alignment=2,  # right
-        spaceAfter=22,
-        leading=22
+        spaceAfter=14,
+        leading=18
     )
-    
+    arabic_header_info.alignment = TA_RIGHT
     arabic_normal = ParagraphStyle(
         'ArabicNormal',
         parent=styles['Normal'],
         fontName=font_name,
         fontSize=16,
-        alignment=2,  # right
+        alignment=1,  # right
         spaceAfter=2,
         leading=24
     )
@@ -141,21 +142,22 @@ def Demande_de_prêt(file_path, demande_data, emp_data):
     content.append(Spacer(1, 5))
     content.append(date_paragraph)
     
-    # Report title
-    report_title = "طلب kkdd"
-    content.append(Paragraph(reshape_arabic(report_title), arabic_title))
-    content.append(Spacer(20, 5))
-    
     # Employee information
     content.append(Paragraph(reshape_arabic(f"اللقب و الإسم :  {emp_data.Nom}"), arabic_header_info))
     content.append(Paragraph(reshape_arabic(f"الرتبة أو الوظيفة : {emp_data.Poste}"), arabic_header_info))
     content.append(Paragraph(reshape_arabic(f"الإقامة الإدارية : {emp_data.residence_admin}"), arabic_header_info))
-    content.append(Paragraph(reshape_arabic(f"المبلغ المطلوب بالأرقام : {demande_data.montant}"), arabic_header_info))
-    content.append(Paragraph(reshape_arabic(f"بالأحرف : {convert_to_arabic_dinars_and_centimes(demande_data.montant)}"), arabic_header_info))
-    content.append(Paragraph(reshape_arabic(f"مدة الإقتطاع : {demande_data.Période_Déduction}"), arabic_header_info))
-    content.append(Paragraph(reshape_arabic(f"تاريخ الإقتطاع : {demande_data.Fin_Déduction}"), arabic_header_info))
-    content.append(Paragraph(reshape_arabic(f"تاريخ الإستفادة : {demande_data.Début_Déduction}"), arabic_header_info))
+    # Report title
+    report_title = "طلب منحة ختان"
+    content.append(Paragraph(reshape_arabic(report_title), arabic_title))
+    content.append(Spacer(20, 5))
+    
+    # Employee information
+    content.append(Paragraph(reshape_arabic(f'اتقدم الى سيادتكم بطلبي هذا و المتمثل في طلب منحة الختان للطفل '), arabic_normal))
+    content.append(Paragraph(reshape_arabic(f'({emp_data.Nom}) التي تمنحها اللجنة.'), arabic_normal))
+    content.append(Paragraph(reshape_arabic(f"و في الأخير تقبلو مني فائق الاحترام و التقدير"), arabic_normal))
+    content.append(Paragraph(reshape_arabic(f"تاريخ الطلب : {demande_data.Début_Déduction}"), arabic_header_info))
     content.append(Paragraph(reshape_arabic(f"رقم حساب المعني : {emp_data.NumCompte}"), arabic_header_info))
+    content.append(Paragraph(reshape_arabic(f"المرفقات : "), arabic_header_info))
     content.append(Paragraph(reshape_arabic("إمضاء المعني  "), arabic_header_info))
     content.append(Spacer(1, 10))
     
