@@ -334,9 +334,11 @@ async def print_demande(
     demande_and_employee = await get_demande_and_employee(demande_id, db)
     demande_type = {
     "قرض مالي": generate_demande_de_prêt,
-    "منحة مرضية":'',
+    "قرض تقسيط":'',
     "العمرة": '',
-    "ختان": generate_demande_pdf_type_d
+    "ختان": generate_demande_pdf_type_d,
+    "زواج": generate_demande_de_prêt,
+    "مرض":''
 }
 
     demande = demande_and_employee["demande"]
