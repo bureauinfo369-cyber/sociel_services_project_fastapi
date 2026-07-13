@@ -147,12 +147,12 @@ def Demande_de_prêt(file_path, demande_data, emp_data):
     content.append(Paragraph(reshape_arabic(f"الرتبة أو الوظيفة : {emp_data.Poste}"), arabic_header_info))
     content.append(Paragraph(reshape_arabic(f"الإقامة الإدارية : {emp_data.residence_admin}"), arabic_header_info))
     # Report title
-    report_title = "طلب منحة زواج"
+    report_title = "طلب منحة العمرة"
     content.append(Paragraph(reshape_arabic(report_title), arabic_title))
     content.append(Spacer(20, 5))
     
     # Employee information
-    content.append(Paragraph(reshape_arabic(f'اتقدم الى سيادتكم بطلبي هذا و المتمثل في طلب منحة زواج '), arabic_normal))
+    content.append(Paragraph(reshape_arabic(f'اتقدم الى سيادتكم بطلبي هذا و المتمثل في طلب منحة العمرة '), arabic_normal))
     content.append(Paragraph(reshape_arabic(f'التي تمنحها اللجنة.'), arabic_normal))
     content.append(Paragraph(reshape_arabic(f"و في الأخير تقبلو مني فائق الاحترام و التقدير"), arabic_normal))
     content.append(Spacer(1, 20))
@@ -263,7 +263,7 @@ def convert_to_arabic_dinars_and_centimes(amount):
     
 
 
-def generate_demande_pdf_type_d(demande_data, employee_data, output_dir="print", subdirs=None):
+def generate_demande_pdf_type_Omra(demande_data, employee_data, output_dir="print", subdirs=None):
     """Generate a demande PDF with flexible path management."""
     if subdirs:
         full_path = os.path.join(output_dir, *subdirs)

@@ -3,6 +3,82 @@
 //const apiUrlprint = 'http://localhost:8000/print'
 const apiUrl = '/Demande';  // Make sure this matches your FastAPI URL
 const apiUrlprint = '/print'
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("Attachments");
+  const addBtn = document.getElementById("addAttachment");
+  const chips = document.getElementById("attachmentsChips");
+  const hidden = document.getElementById("attachmentsHidden");
+
+  if (!input || !addBtn || !chips || !hidden) return; // page safety
+
+  const selected = new Set();
+
+  function syncHidden() {
+    hidden.value = Array.from(selected).join(",");
+  }
+
+  function render() {
+    chips.innerHTML = "";
+
+    selected.forEach((value) => {
+      const chip = document.createElement("span");
+      chip.style.cssText = `
+        background:#eee; border:1px solid #ddd; padding:6px 10px;
+        border-radius:999px; display:inline-flex; align-items:center; gap:8px;
+        font-size:14px;
+      `;
+
+      const text = document.createElement("span");
+      text.textContent = value;
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "×";
+      remove.style.cssText = `
+        cursor:pointer; border:none; background:transparent; font-size:16px; line-height:1;
+      `;
+
+      remove.addEventListener("click", () => {
+        selected.delete(value);
+        syncHidden();
+        render();
+      });
+
+      chip.appendChild(text);
+      chip.appendChild(remove);
+      chips.appendChild(chip);
+    });
+
+    syncHidden();
+  }
+
+  function tryAdd() {
+    const value = (input.value || "").trim();
+    if (!value) return;
+
+    if (selected.has(value)) {
+      input.value = "";
+      return;
+    }
+
+    selected.add(value);
+    input.value = "";
+    render();
+  }
+
+  addBtn.addEventListener("click", tryAdd);
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      tryAdd();
+    }
+  });
+
+  render();
+});  
+
 async function searchDemandes() {
     // Get all search field values
     const demande_id = document.getElementById('search_demande_id').value;
@@ -13,8 +89,8 @@ async function searchDemandes() {
     const montante = document.getElementById('search_montante').value;
     const demande_satatu = document.getElementById('search_statut').value;
 
-    
-    
+
+     const attachments = document.getElementById('attachmentsHidden').value;
     // Build query parameters
     const params = new URLSearchParams();
     
@@ -24,7 +100,8 @@ async function searchDemandes() {
     if (gestion) params.append('gestion', gestion);
     if (periodeDeduction) params.append('Période_Déduction', periodeDeduction);
     if (montante) params.append('montante', montante);
-    if (demande_satatu) params.append('demande_satatu', demande_satatu);
+    if (demande_satatu) params.append('demande_statut', demande_satatu);
+    if (attachments) params.append('attachments', attachments);
     // Check if at least one field is filled
     if (params.toString() === '') {
         alert('Please enter at least one search criteria');
@@ -87,8 +164,15 @@ async function fetchAllDemandes() {
 
 // Function to display demandes in the table
 function displayDemandes(demandes) {
-    const tableBody = document.getElementById('demandesTableBody'); // Make sure your table has this ID
-    tableBody.innerHTML = ''; // Clear existing rows
+    const tableBody = document.getElementById('demandesTableBody');
+    if (!tableBody) {
+        console.error("tableBody not found! Check the ID 'demandesTableBody'");
+        return;
+    }
+    tableBody.innerHTML = '';
+
+    let totalMontant = 0;
+
     demandes.forEach(demande => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -100,21 +184,38 @@ function displayDemandes(demandes) {
             <td>${demande.Période_Déduction}</td>
             <td>${demande.Début_Déduction}</td>
             <td>${demande.montant}</td>
+            <td>/</td>
             <td>${demande.demande_statut}</td>
-            
             <td>
                 <button onclick="deleteDemande('${demande.demande_id}')">حذف ❌</button>
-                
             </td>
             <td>
                 <button class="print-btn" onclick="printDemande(parseInt(${demande.demande_id}, 10))"> 🖨️ طباعة</button>
-                
             </td>
         `;
         tableBody.appendChild(row);
-    });
-}
 
+        // Clean the montant value: remove anything that's not a digit, dot, or minus sign
+        const cleanValue = String(demande.montant).replace(/[^0-9.-]+/g, '');
+        const numericValue = parseFloat(cleanValue);
+
+        if (!isNaN(numericValue)) {
+            totalMontant += numericValue;
+        } else {
+            console.warn("Invalid montant value:", demande.montant);
+        }
+    });
+
+
+
+    const totalRow = document.createElement('tr');
+    totalRow.innerHTML = `
+        <td colspan="7" style="text-align:right; font-weight:bold;font-size:25px;">الإجمالي:</td>
+        <td style="font-weight:bold;font-size:25px;">${totalMontant.toFixed(2)}</td>
+        <td colspan="3"></td>
+    `;
+    tableBody.appendChild(totalRow);
+}
 
 
 

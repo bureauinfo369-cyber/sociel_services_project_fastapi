@@ -44,7 +44,7 @@
         </div>
 
         <!-- search_type_prestation -->
-        <div class="md:col-span-2">
+        <div >
             <label for="search_type_prestation">نوع الطلب</label>
             <input 
                 type="text" 
@@ -63,7 +63,42 @@
                 <option value="منحة مختلفة">
             </datalist>
         </div>
+        <div>
+            <label for="">الإبن</label>
+            <input 
+                type="text" 
+                id="" 
+                placeholder="الإبن" 
+            />
+        </div>
+        <!--  -->
+        <div class="md:col-span-2">
+  <label for="Attachments">المرفقات</label>
 
+  <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+    <input
+      type="text"
+      id="Attachments"
+      placeholder="اختر/اكتب ثم اضغط Enter أو زر +"
+      list="list_Attachments"
+      style="cursor:pointer; min-width: 220px;"
+    />
+
+    <button type="button" id="addAttachment" style="cursor:pointer;">+</button>
+  </div>
+
+  <div id="attachmentsChips" style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;"></div>
+
+  <input type="hidden" name="attachments" id="attachmentsHidden" value="">
+</div>
+
+<datalist id="list_Attachments">
+  <option value="شهادة طبية">
+  <option value="شهادة عائلية">
+    <option value="شهادة ميلاد">
+  <option value="نسخة من الدفتر العائلي">
+  <option value="شهادة وفاة">
+</datalist>
         <!-- search_gestion -->
         <div>
             <label for="search_gestion">السنة</label>
@@ -159,6 +194,7 @@
                     <th>المدة</th>
                     <th>البداية</th>
                     <th>المبلغ</th>
+                    <th>المرفقات</th>
                     <th>حالة الطلب</th>
                     <th>حذف</th>
                     <th>طباعة</th>
@@ -182,6 +218,9 @@
     </footer>
 
     
-    <script src="/static/assets/controle/controle_demande.js"></script>
+    
+    
+    <script src="/static/assets/controle/controle_demande.js?v=2"></script>
+    
 </body>
 </html>
