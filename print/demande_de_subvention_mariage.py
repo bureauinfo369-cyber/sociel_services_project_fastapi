@@ -263,7 +263,7 @@ def convert_to_arabic_dinars_and_centimes(amount):
     
 
 
-def generate_demande_pdf_type_d(demande_data, employee_data, output_dir="print", subdirs=None):
+def generate_demande_pdf_type_mariage(demande_data, employee_data, output_dir="print", subdirs=None):
     """Generate a demande PDF with flexible path management."""
     if subdirs:
         full_path = os.path.join(output_dir, *subdirs)

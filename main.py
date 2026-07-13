@@ -1,4 +1,5 @@
 from fastapi import FastAPI ,HTTPException,Depends
+from datetime import date
 from pydantic import BaseModel
 from typing import List,Annotated,Optional
 from database import get_database_url,engine
@@ -9,7 +10,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import models
 from print.Demande_de_prêt import generate_demande_de_prêt
-from print.demande_de_subvention import generate_demande_pdf_type_d
+from print.demande_de_subvention_khitan import generate_demande_pdf_type_khitan
+from print.demande_de_subvention_mariage import generate_demande_pdf_type_mariage
+from print.demande_de_subvention_Omra import generate_demande_pdf_type_Omra
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 DATABASE_URL = get_database_url()
@@ -35,7 +38,7 @@ class EmploiyesBase(BaseModel):
 class DemandeBase(BaseModel):
     NumCompte: str
     type_prestation: str
-    gestion: str
+    gestion: date
     Période_Déduction: str  # Adjust type as necessary
     Début_Déduction: str  # Adjust type as necessary
     Fin_Déduction: str  # Adjust type as necessary
@@ -335,9 +338,9 @@ async def print_demande(
     demande_type = {
     "قرض مالي": generate_demande_de_prêt,
     "قرض تقسيط":'',
-    "العمرة": '',
-    "ختان": generate_demande_pdf_type_d,
-    "زواج": generate_demande_de_prêt,
+    "العمرة": generate_demande_pdf_type_Omra,
+    "ختان": generate_demande_pdf_type_khitan,
+    "زواج": generate_demande_pdf_type_mariage,
     "مرض":''
 }
 
