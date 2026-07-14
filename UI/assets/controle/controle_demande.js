@@ -4,6 +4,65 @@
 const apiUrl = '/Demande';  // Make sure this matches your FastAPI URL
 const apiUrlprint = '/print'
 
+
+const modeSelect = document.getElementById('modeSelect');
+const inputContainer = document.getElementById('inputContainer');
+const inputLabel = document.getElementById('inputLabel');
+
+// Listen for dropdown changes
+modeSelect.addEventListener('change', function() {
+    const mode = this.value;
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
+    const currentDay = String(today.getDate()).padStart(2, '0');
+
+    if (mode === "full-date") {
+        inputLabel.textContent = "اختر التاريخ:";
+        inputContainer.innerHTML = `<input type="date" id="search_gestion" value="${currentYear}-${currentMonth}-${currentDay}">`;
+    } 
+    
+    else if (mode === "month-year") {
+        inputLabel.textContent = "اختر شهر و سنة:";
+        inputContainer.innerHTML = `
+  <input type="text" id="search_gestion" inputmode="numeric" placeholder="2026-07">
+`;
+    } 
+    
+});
+
+function Change_account(){
+
+    const Account_name = document.getElementById('Account').value;
+    const Account_N = document.getElementById('search_NumCompte')
+    switch (Account_name) {
+        case 'BNA':
+            Account_N.value = '001';
+            break;
+        case 'CCP':
+            Account_N.value = '007';
+            break;
+        case 'BDL':
+            Account_N.value = '005';
+            break;
+        case 'BADR':
+            Account_N.value = '003';
+            break;
+        case 'TRS':
+            Account_N.value = '008';
+            break;
+        case 'CPA':
+            Account_N.value = '004';
+            break;
+    
+        default:
+            break;
+    }
+
+
+}
+
+
     document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("Attachments");
   const addBtn = document.getElementById("addAttachment");

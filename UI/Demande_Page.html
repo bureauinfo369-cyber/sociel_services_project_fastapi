@@ -101,12 +101,21 @@
 </datalist>
         <!-- search_gestion -->
         <div>
-            <label for="search_gestion">السنة</label>
-            <input 
-                type="text" 
-                id="search_gestion" 
-                placeholder="السنة" 
-            />
+            <!-- Step 1: Choose the mode -->
+<label for="modeSelect">اختر نمط ادخال التاريخ :</label>
+<select id="modeSelect">
+    <option value="full-date">تاريخ كامل (يوم,شهر,سنة)</option>
+    <option value="month-year">شهر و سنة</option>
+</select>
+
+<br><br>
+
+<!-- Step 2: The dynamic input and container -->
+<label id="inputLabel" for="search_gestion">اختر:</label>
+<span id="inputContainer">
+    <!-- JavaScript will swap the elements inside here -->
+    <input type="date" id="search_gestion">
+</span>
         </div>
 
         <!-- search_periode_deduction -->
@@ -117,6 +126,26 @@
                 id="search_periode_deduction" 
                 placeholder="المدة" 
             />
+        </div>
+        
+        <div >
+            <label for="Account">حساب</label>
+            <input 
+                type="text" 
+                id="Account" 
+                placeholder="حساب" 
+                list="list_Account" 
+                 style="cursor: pointer;" oninput="Change_account()"
+            />
+            <datalist id="list_Account">
+                <option value="CCP">
+                <option value="BNA">
+                <option value="BDL">
+                <option value="CPA">
+                <option value="TRS">
+                    <option value="BADR">
+                
+            </datalist>
         </div>
 
         <!-- search_Montante -->
@@ -169,6 +198,18 @@
             class="bg-green-600 active:bg-green-600 hover:bg-green-700"
         >
             إضافة طلب ➕
+        </button>
+        <button 
+            id="printbtn1"
+            class="bg-green-600 active:bg-green-600 hover:bg-green-700"
+        >
+           طباعة النفقات  🖨️
+        </button>
+        <button 
+            id="printbtn2"
+            class="bg-green-600 active:bg-green-600 hover:bg-green-700"
+        >
+           طباعة قائمة المعنين بالخصم  🖨️
         </button>
     </div>
 
